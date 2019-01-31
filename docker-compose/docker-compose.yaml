@@ -1,0 +1,37 @@
+## docker-compose akan di jalankan dari root..
+
+version: "3"
+services:
+  membership:
+    build: ../
+    command: [
+      "./go/bin/apps",
+      "--server_address=0.0.0.0:9100",
+      "--broker_address=0.0.0.0:10001"
+    ]
+    environment:
+    - SERVICE_NAME=msa.valueid.membership
+    - ENVIRONMENT=local
+    #DB
+    - MV_SQL_DB=users
+    - MV_SQL_USER=admin
+    - MV_SQL_PASSWORD=dev-password
+    - MV_SQL_SERVER=db
+    - MV_SQL_PORT=5432
+    ports:
+    - 9100:9100
+#  redis:
+#    image: redis
+#    expose:
+#    - 6379
+#  db:
+#    image: postgres:10-alpine
+#    environment:
+#    - POSTGRES_DB=users
+#    - POSTGRES_USER=admin
+#    - POSTGRES_PASSWORD=dev-password
+#    - PGDATA=/var/lib/postgresql/data/pgdata
+#    volumes:
+#    - ./postgres-data/data:/var/lib/postgresql/data/pgdata
+#    ports:
+#    - "5433:5432"

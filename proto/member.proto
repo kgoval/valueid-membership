@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+service MemberService {
+    rpc Detail (MemberDetailRequest) returns (MemberDetailResponse);
+}
+
+message MemberDetailRequest {
+    string id = 1;
+}
+
+message MemberDetailResponse {
+    string email = 1;
+    string phone = 2;
+    string first_name = 3;
+    string last_name = 4;
+    string gender = 5;
+    string identity_no = 6;
+}
