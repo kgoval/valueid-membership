@@ -33,17 +33,15 @@ func main(){
 	fmt.Println("engine started..")
 	var service micro.Service
 
-	opts := micro.Option(func(*micro.Options){
-		micro.Name(boot.Config.ServiceName)
-	})
+
 
 	if strings.ToLower(boot.Config.Environment) == "local" {
-		service = local.NewService(opts)
+		service = local.NewService()
 	}else{
-		service = k8s.NewService(opts)
+		service = k8s.NewService()
 	}
 
-	service.Init()
+	service.Init(micro.Name(boot.Config.ServiceName))
 
 	handler.Register(service.Server())
 
